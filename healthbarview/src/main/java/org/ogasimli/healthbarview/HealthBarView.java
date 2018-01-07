@@ -1,5 +1,6 @@
 package org.ogasimli.healthbarview;
 
+
 import org.ogasimli.healthbarview.library.R;
 
 import android.animation.ValueAnimator;
@@ -606,6 +607,7 @@ public class HealthBarView extends View {
      * @param value    the actual value
      * @param minValue the starting point of range
      * @param maxValue the end point of range
+     * @return the label which corresponds to the given value in the range
      */
     protected @Nullable
     String determineLabel(float value, float minValue, float maxValue) {

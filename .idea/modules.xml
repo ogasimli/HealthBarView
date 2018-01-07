@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HealthBarView.iml" filepath="$PROJECT_DIR$/HealthBarView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/healthbarview/healthbarview.iml" filepath="$PROJECT_DIR$/healthbarview/healthbarview.iml" />
     </modules>
   </component>
 </project>

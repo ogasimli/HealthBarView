@@ -1,0 +1,154 @@
+/*
+ * Copyright (c) Joaquim Ley 2016. All Rights Reserved.
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Gradle script for uploading your own library to jcenter()
+ * 
+ * Make a copy of the deploy.properties template:
+ * https://github.com/JoaquimLey/jcenter-config/deploy.properties
+ * 
+ * Run with: ./gradlew :moduleName bintrayUpload
+ * 
+ * More info: https://github.com/JoaquimLey/jcenter-config
+ */
+
+def pkgGroup = 'org.ogasimli'
+def pkgVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
+def pkgVersionDescription = 'Initial release'
+def pkgRepo = 'custom_view'
+def pkgName = 'HealtBarView'
+def pkgUserOrg = 'ogasimli'
+def pkgDescription = 'Custom health bar like view for Android.'
+
+def pkgWebUrl = 'https://github.com/ogasimli/HealthBarView'
+def pkgVcsUrl = 'https://github.com/ogasimli/HealthBarView.git'
+def pkgIssueTrackerUrl = 'https://github.com/ogasimli/HealthBarView/issues'
+
+def pkgLicense = 'Apache-2.0'
+def pkgPublicDownloadNumbers = true
+
+def gpgSign = false
+def pomPackaging = 'aar'
+def pomName = 'healthbarview'
+def pomArtifactId = 'healthbarview'
+
+def pomScmConnection = 'scm:git@github.com/ogasimli/HealthBarView.git'
+def pomScmDevConnection = 'scm:git@github.com/ogasimli/HealthBarView.git'
+def pomUrl = 'https://github.com/ogasimli/HealthBarView'
+
+def pomDeveloperId = 'ogasimli'
+def pomDeveloperName = 'Orkhan Gasimli'
+def pomDeveloperEmail = 'orkhan.gasimli@gmail.com'
+
+def pomLicenseName = 'The Apache Software License, Version 2.0'
+def pomLicenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+group = pkgGroup
+version = pkgVersion
+
+bintray {
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.apikey')
+    publish = true
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = pkgRepo
+        name = pkgName
+        userOrg = pkgUserOrg
+        desc = pkgDescription
+        websiteUrl = pkgWebUrl
+        issueTrackerUrl = pkgIssueTrackerUrl
+        vcsUrl = pkgVcsUrl
+        licenses = [pkgLicense]
+        labels = labels
+        publicDownloadNumbers = pkgPublicDownloadNumbers
+        version {
+            name = pkgVersion
+            released = new Date()
+            desc = pkgVersionDescription
+            vcsTag = pkgVersion
+            gpg {
+                //Determines whether to GPG sign the files. The default is false
+                sign = gpgSign
+                passphrase = properties.getProperty('bintray.gpg.password')
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging pomPackaging
+                name pomName
+                description pkgDescription
+                artifactId pomArtifactId
+                url pkgWebUrl
+                licenses {
+                    license {
+                        name pomLicenseName
+                        url pomLicenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id pomDeveloperId
+                        name pomDeveloperName
+                        email pomDeveloperEmail
+                    }
+                }
+                scm {
+                    connection pomScmConnection
+                    developerConnection pomScmDevConnection
+                    url pomUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions {
+    doLast{
+        println project.getConvention()
+    }
+}
