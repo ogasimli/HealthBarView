@@ -822,7 +822,7 @@ public class HealthBarView extends View {
 
             mAnimator.addUpdateListener(valueAnimator -> {
                 mValueToDraw = (float) valueAnimator.getAnimatedValue();
-                HealthBarView.this.invalidate();
+                invalidate();
             });
 
             mAnimator.start();
