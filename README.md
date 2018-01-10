@@ -134,155 +134,30 @@ In below picture you can see the above elements:
 
 Each of these componenets has their own properties. In below table you can find the properties of each componenet.
 
-<html>
-<head>
-</head>
-<body>
-    <hr>
-    <table cellspacing=1 border=1>
-        <tr>
-            <td>Property</td>
-            <td>Type</td>
-            <td>Default value</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Label</td>
-        </tr>
-        <tr>
-            <td>hbv_showLabel</td>
-            <td>boolean</td>
-            <td>TRUE</td>
-        </tr>
-        <tr>
-            <td>hbv_labelTextColor</td>
-            <td>color</td>
-            <td>#009688</td>
-        </tr>
-        <tr>
-            <td>hbv_labelTextSize</td>
-            <td>dimension</td>
-            <td>16sp</td>
-        </tr>
-        <tr>
-            <td>hbv_labelFont</td>
-            <td>reference</td>
-            <td>Typeface.MONOSPACE</td>
-        </tr>
-        <tr>
-            <td>hbv_labels</td>
-            <td>string</td>
-            <td>Poor,Below Average,Average,Above Average,Good,Excellent</td>
-        </tr>
-        <tr>
-            <td>hbv_showValue</td>
-            <td>boolean</td>
-            <td>TRUE</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Value</td>
-        </tr>
-        <tr>
-            <td>hbv_valueTextColor</td>
-            <td>color</td>
-            <td>#009688</td>
-        </tr>
-        <tr>
-            <td>hbv_valueTextSize</td>
-            <td>dimension</td>
-            <td>16sp</td>
-        </tr>
-        <tr>
-            <td>hbv_valueFont</td>
-            <td>reference</td>
-            <td>Typeface.MONOSPACE</td>
-        </tr>
-        <tr>
-            <td>hbv_minValue</td>
-            <td>float</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>hbv_maxValue</td>
-            <td>float</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>hbv_value</td>
-            <td>float</td>
-            <td>90</td>
-        </tr>
-        <tr>
-            <td>hbv_valueSuffix</td>
-            <td>string</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>hbv_valueDecimalFormat</td>
-            <td>string</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Indicator</td>
-        </tr>
-        <tr>
-            <td>hbv_indicatorWidth</td>
-            <td>dimension</td>
-            <td>0.5dp</td>
-        </tr>
-        <tr>
-            <td>hbv_indicatorColor</td>
-            <td>color</td>
-            <td>#009688</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Stroke</td>
-        </tr>
-        <tr>
-            <td>hbv_strokeWidth</td>
-            <td>dimension</td>
-            <td>1dp</td>
-        </tr>
-        <tr>
-            <td>hbv_strokeColor</td>
-            <td>color</td>
-            <td>#009688</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Bar</td>
-        </tr>
-        <tr>
-            <td>hbv_colorFrom</td>
-            <td>color</td>
-            <td>#ffc200</td>
-        </tr>
-        <tr>
-            <td>hbv_colorTo</td>
-            <td>color</td>
-            <td>#7bfbaf</td>
-        </tr>
-        <tr>
-            <td colspan=3>
-                <center>Animation</td>
-        </tr>
-        <tr>
-            <td>hbv_animated</td>
-            <td>boolean</td>
-            <td>FALSE</td>
-        </tr>
-        <tr>
-            <td>hbv_animationDuration</td>
-            <td>integer</td>
-            <td>4000</td>
-        </tr>
-    </table>
-    <hr>
-</body>
-</html>
+| Component | Property               | Type      | Default value                                           |
+|-----------|------------------------|-----------|---------------------------------------------------------|
+| Label     | hbv_showLabel          | boolean   | TRUE                                                    |
+| Label     | hbv_labelTextColor     | color     | #009688                                                 |
+| Label     | hbv_labelTextSize      | dimension | 16sp                                                    |
+| Label     | hbv_labelFont          | reference | Typeface.MONOSPACE                                      |
+| Label     | hbv_labels             | string    | Poor,Below Average,Average,Above Average,Good,Excellent |
+| Label     | hbv_showValue          | boolean   | TRUE                                                    |
+| Value     | hbv_valueTextColor     | color     | #009688                                                 |
+| Value     | hbv_valueTextSize      | dimension | 16sp                                                    |
+| Value     | hbv_valueFont          | reference | Typeface.MONOSPACE                                      |
+| Value     | hbv_minValue           | float     | 0                                                       |
+| Value     | hbv_maxValue           | float     | 100                                                     |
+| Value     | hbv_value              | float     | 90                                                      |
+| Value     | hbv_valueSuffix        | string    |                                                         |
+| Value     | hbv_valueDecimalFormat | string    | 0                                                       |
+| Indicator | hbv_indicatorWidth     | dimension | 0.5dp                                                   |
+| Indicator | hbv_indicatorColor     | color     | #009688                                                 |
+| Stroke    | hbv_strokeWidth        | dimension | 1dp                                                     |
+| Stroke    | hbv_strokeColor        | color     | #009688                                                 |
+| Bar       | hbv_colorFrom          | color     | #ffc200                                                 |
+| Bar       | hbv_colorTo            | color     | #7bfbaf                                                 |
+| General   | hbv_animated           | boolean   | FALSE                                                   |
+| General   | hbv_animationDuration  | integer   | 4000
 
 ## Release Note
 
