@@ -5,7 +5,6 @@ import org.ogasimli.healthbarview.library.R;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -17,7 +16,6 @@ import android.graphics.Typeface;
 import android.support.annotation.FontRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -40,15 +38,15 @@ public class HealthBarView extends View {
 
     private static final String LOG_TAG = HealthBarView.class.getSimpleName();
 
-    // Extra padding to avoid cutting of paint
-    private static final int EXTRA_PADDING = 10;
-
     private Context mContext;
+
+    // Extra padding to avoid cutting of paint
+    private static final int EXTRA_PADDING = Util.dpToPx(2);
 
     // Label fields
     private boolean mShowLabel = true;
     private int mLabelTextColor = 0xff009688;
-    private int mLabelTextSize = 40;
+    private int mLabelTextSize = Util.spToPx(16);
     private Typeface mLabelFont = Typeface.MONOSPACE;
     private String[] mLabels = {"Poor", "Below Average", "Average", "Above Average", "Good",
             "Excellent"};
@@ -57,7 +55,7 @@ public class HealthBarView extends View {
     // Value fields
     private boolean mShowValue = true;
     private int mValueTextColor = 0xff009688;
-    private int mValueTextSize = 40;
+    private int mValueTextSize = Util.spToPx(16);
     private float mMinValue = 0;
     private float mMaxValue = 100;
     private float mValue = 0;
@@ -65,19 +63,19 @@ public class HealthBarView extends View {
     private Typeface mValueFont = Typeface.MONOSPACE;
 
     // Indicator fields
-    private int mIndicatorWidth = 2;
+    private int mIndicatorWidth = Util.dpToPx(0.5f);
     private int mIndicatorColor = 0xff009688;
 
     // Bar
     // Stroke fields
-    private int mStrokeWidth = 3;
+    private int mStrokeWidth = Util.dpToPx(1);
     private int mStrokeColor = 0xff009688;
     // Fill fields
     private int mColorFrom = 0xffffc200;
     private int mColorTo = 0xff7bfbaf;
 
     // Formatter object for formatting values
-    private DecimalFormat mDecimalFormat = new DecimalFormat("0");
+    private DecimalFormat mValueDecimalFormat = new DecimalFormat("0");
 
     // Animation
     private boolean mAnimated = false;
@@ -102,7 +100,7 @@ public class HealthBarView extends View {
     private int mLabelWidth;
     private int mValueHeight;
     private int mValueWidth;
-    private int mIndicatorOverflowLength = 40;
+    private int mIndicatorOverflowLength = Util.dpToPx(10);
     private int mViewWidth;
     private int mViewHeight;
     private int mBarFillLeft;
@@ -289,10 +287,10 @@ public class HealthBarView extends View {
             setColorTo(a.getInt(R.styleable.HealthBarView_hbv_colorTo, mColorTo));
         }
 
-        if (a.hasValue(R.styleable.HealthBarView_hbv_decimalFormat)) {
+        if (a.hasValue(R.styleable.HealthBarView_hbv_valueDecimalFormat)) {
             try {
-                String pattern = a.getString(R.styleable.HealthBarView_hbv_decimalFormat);
-                setDecimalFormat(new DecimalFormat(pattern));
+                String pattern = a.getString(R.styleable.HealthBarView_hbv_valueDecimalFormat);
+                setValueDecimalFormat(new DecimalFormat(pattern));
             } catch (Exception exception) {
                 Log.w(LOG_TAG, exception.getMessage());
             }
@@ -369,7 +367,7 @@ public class HealthBarView extends View {
      */
     private void drawValue(Canvas canvas) {
         if (isShowValue()) {
-            setValueText(formatValueText(mValueToDraw, mValueSuffix, mDecimalFormat));
+            setValueText(formatValueText(mValueToDraw, mValueSuffix, mValueDecimalFormat));
             // Determine width and height of value text
             determineValueWidth(mValueText, mValuePaint, isShowValue());
             determineValueHeight(mValuePaint, isShowValue());
@@ -467,7 +465,7 @@ public class HealthBarView extends View {
             desiredWidth += mStrokeWidth;
 
             // Set value to be drawn
-            setValueText(formatValueText(mValueToDraw, mValueSuffix, mDecimalFormat));
+            setValueText(formatValueText(mValueToDraw, mValueSuffix, mValueDecimalFormat));
             // Determine width of value text
             determineValueWidth(mValueText, mValuePaint, isShowValue());
 
@@ -590,21 +588,6 @@ public class HealthBarView extends View {
     }
 
     /**
-     * Determine if value is between v1 and v2
-     *
-     * @param value the argument which should be checked if it is between v1 and v2
-     * @param v1    the first number
-     * @param v2    the second number
-     */
-    private boolean isBetween(float value, float v1, float v2) {
-        // Determine the minimum of these two numbers
-        float min = Math.min(v1, v2);
-        // Determine the maximum of these two numbers
-        float max = Math.max(v1, v2);
-        return value >= min && value <= max;
-    }
-
-    /**
      * Determine the label corresponding the value within the range from minValue to maxValue
      *
      * @param value    the actual value
@@ -617,34 +600,14 @@ public class HealthBarView extends View {
         String[] labels = Arrays.copyOf(mLabels, mLabels.length);
         if (minValue > maxValue) Collections.reverse(Arrays.asList(labels));
         float fraction = Math.abs(maxValue - minValue) / labels.length;
-        for (int i = 1; i <= labels.length; i++) {
-            if (value <= fraction * i) {
-                return labels[i - 1];
-            }
-        }
-        return labels[0];
+        int index = (int) (Math.abs(value - minValue) / fraction);
+        index = Math.min(index, labels.length - 1);
+        return labels[index];
     }
 
     protected @NonNull
     String formatValueText(float value, String suffix, DecimalFormat decimalFormat) {
-        String result = decimalFormat.format(value);
-        if (suffix != null) result += suffix;
-        return result;
-    }
-
-    /**
-     * Extract color int from color resource id and return it
-     *
-     * @param color the int value representing either color int, or color resource id
-     * @return the color
-     */
-    private int colorSetter(int color) {
-        try {
-            return ContextCompat.getColor(mContext, color);
-        } catch (Resources.NotFoundException e) {
-            Log.d(LOG_TAG, "Color resource not found.");
-            return color;
-        }
+        return Util.formatValueText(value, suffix, decimalFormat);
     }
 
     //endregion helper
@@ -718,7 +681,7 @@ public class HealthBarView extends View {
     }
 
     public void setLabelTextColor(int labelTextColor) {
-        mLabelTextColor = colorSetter(labelTextColor);
+        mLabelTextColor = Util.colorSetter(mContext, labelTextColor);
         mLabelPaint.setColor(mLabelTextColor);
         invalidate();
     }
@@ -727,10 +690,14 @@ public class HealthBarView extends View {
         return mLabelTextSize;
     }
 
-    public void setLabelTextSize(int labelTextSize) {
+    private void setLabelTextSize(int labelTextSize) {
         mLabelTextSize = labelTextSize;
         mLabelPaint.setTextSize(mLabelTextSize);
         requestLayout();
+    }
+
+    public void setLabelTextSize(float labelTextSize) {
+        setLabelTextSize(Util.spToPx(labelTextSize));
     }
 
     public String[] getLabels() {
@@ -786,7 +753,7 @@ public class HealthBarView extends View {
     }
 
     public void setValueTextColor(int valueTextColor) {
-        mValueTextColor = colorSetter(valueTextColor);
+        mValueTextColor = Util.colorSetter(mContext, valueTextColor);
         mValuePaint.setColor(mValueTextColor);
         invalidate();
     }
@@ -795,10 +762,14 @@ public class HealthBarView extends View {
         return mValueTextSize;
     }
 
-    public void setValueTextSize(int valueTextSize) {
+    private void setValueTextSize(int valueTextSize) {
         mValueTextSize = valueTextSize;
         mValuePaint.setTextSize(mValueTextSize);
         requestLayout();
+    }
+
+    public void setValueTextSize(float valueTextSize) {
+        setValueTextSize(Util.spToPx(valueTextSize));
     }
 
     public float getMinValue() {
@@ -807,6 +778,7 @@ public class HealthBarView extends View {
 
     public void setMinValue(float minValue) {
         mMinValue = minValue;
+        mValue = minValue;
         invalidate();
     }
 
@@ -825,7 +797,7 @@ public class HealthBarView extends View {
 
     public void setValue(float value) {
         float previousValue = mValue;
-        if (isBetween(value, mMinValue, mMaxValue)) {
+        if (Util.isBetween(value, mMinValue, mMaxValue)) {
             mValue = value;
         } else {
             mValue = mMinValue;
@@ -887,10 +859,14 @@ public class HealthBarView extends View {
         return mIndicatorWidth;
     }
 
-    public void setIndicatorWidth(int indicatorWidth) {
+    private void setIndicatorWidth(int indicatorWidth) {
         mIndicatorWidth = indicatorWidth;
         mIndicatorPaint.setStrokeWidth(mIndicatorWidth);
         requestLayout();
+    }
+
+    public void setIndicatorWidth(float indicatorWidth) {
+        setIndicatorWidth(Util.dpToPx(indicatorWidth));
     }
 
     public int getIndicatorColor() {
@@ -898,7 +874,7 @@ public class HealthBarView extends View {
     }
 
     public void setIndicatorColor(int indicatorColor) {
-        mIndicatorColor = colorSetter(indicatorColor);
+        mIndicatorColor = Util.colorSetter(mContext, indicatorColor);
         mIndicatorPaint.setColor(mIndicatorColor);
         invalidate();
     }
@@ -907,10 +883,14 @@ public class HealthBarView extends View {
         return mStrokeWidth;
     }
 
-    public void setStrokeWidth(int strokeWidth) {
+    private void setStrokeWidth(int strokeWidth) {
         mStrokeWidth = strokeWidth;
         mBarStrokePaint.setStrokeWidth(mStrokeWidth);
         requestLayout();
+    }
+
+    public void setStrokeWidth(float strokeWidth) {
+        setStrokeWidth(Util.dpToPx(strokeWidth));
     }
 
     public int getStrokeColor() {
@@ -918,7 +898,7 @@ public class HealthBarView extends View {
     }
 
     public void setStrokeColor(int strokeColor) {
-        mStrokeColor = colorSetter(strokeColor);
+        mStrokeColor = Util.colorSetter(mContext, strokeColor);
         mBarStrokePaint.setColor(mStrokeColor);
         invalidate();
     }
@@ -928,7 +908,7 @@ public class HealthBarView extends View {
     }
 
     public void setColorFrom(int colorFrom) {
-        mColorFrom = colorSetter(colorFrom);
+        mColorFrom = Util.colorSetter(mContext, colorFrom);
         invalidate();
     }
 
@@ -937,17 +917,17 @@ public class HealthBarView extends View {
     }
 
     public void setColorTo(int colorTo) {
-        mColorTo = colorSetter(colorTo);
+        mColorTo = Util.colorSetter(mContext, colorTo);
         invalidate();
     }
 
-    public DecimalFormat getDecimalFormat() {
-        return mDecimalFormat;
+    public DecimalFormat getValueDecimalFormat() {
+        return mValueDecimalFormat;
     }
 
-    public void setDecimalFormat(DecimalFormat decimalFormat) {
-        if (decimalFormat != null) {
-            mDecimalFormat = decimalFormat;
+    public void setValueDecimalFormat(DecimalFormat valueDecimalFormat) {
+        if (valueDecimalFormat != null) {
+            mValueDecimalFormat = valueDecimalFormat;
             requestLayout();
         }
     }

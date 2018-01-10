@@ -17,6 +17,8 @@
         <attr name="hbv_valueTextSize" format="dimension"/>
         <attr name="hbv_valueSuffix" format="string"/>
         <attr name="hbv_valueFont" format="reference"/>
+        // Decimal format
+        <attr name="hbv_valueDecimalFormat" format="string"/>
 
         // Indicator
         <attr name="hbv_indicatorWidth" format="dimension"/>
@@ -29,8 +31,7 @@
         // Fill
         <attr name="hbv_colorFrom" format="color"/>
         <attr name="hbv_colorTo" format="color"/>
-        // Decimal format
-        <attr name="hbv_decimalFormat" format="string"/>
+
         // Animation
         <attr name="hbv_animated" format="boolean"/>
         <attr name="hbv_animationDuration" format="integer"/>
