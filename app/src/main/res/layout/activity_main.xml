@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:HealthBarView="http://schemas.android.com/apk/res-auto"
@@ -10,12 +9,55 @@
     android:layout_margin="16dp"
     tools:context="org.ogasimli.healthbarview.MainActivity">
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:textStyle="bold"
+        android:text="Configured from XML"/>
+
     <org.ogasimli.healthbarview.HealthBarView
-        android:id="@+id/healthbarview"
+        android:id="@+id/healthbarview_xml"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        HealthBarView:hbv_showLabel="true"
+        HealthBarView:hbv_labelTextColor="#009688"
+        HealthBarView:hbv_labelTextSize="16sp"
+        HealthBarView:hbv_labelFont="@font/lato_light_italic"
+        HealthBarView:hbv_labels="Poor,Below Average,Average,Above Average,Good,Excellent"
+        HealthBarView:hbv_showValue="true"
+        HealthBarView:hbv_valueTextColor="#009688"
+        HealthBarView:hbv_valueTextSize="16sp"
+        HealthBarView:hbv_valueFont="@font/lato_light_italic"
+        HealthBarView:hbv_minValue="0"
+        HealthBarView:hbv_maxValue="100"
+        HealthBarView:hbv_value="90"
+        HealthBarView:hbv_valueSuffix="\u00B0"
+        HealthBarView:hbv_valueDecimalFormat="0"
+        HealthBarView:hbv_indicatorWidth="0.5dp"
+        HealthBarView:hbv_indicatorColor="#009688"
+        HealthBarView:hbv_strokeWidth="1dp"
+        HealthBarView:hbv_strokeColor="#009688"
+        HealthBarView:hbv_colorFrom="#ffc200"
+        HealthBarView:hbv_colorTo="#7bfbaf"
         HealthBarView:hbv_animated="true"
-        HealthBarView:hbv_value="95"/>
+        HealthBarView:hbv_animationDuration="4000"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:textStyle="bold"
+        android:text="Configured from Java"/>
+
+    <org.ogasimli.healthbarview.HealthBarView
+        android:id="@+id/healthbarview_java"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

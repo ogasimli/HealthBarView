@@ -1,7 +1,9 @@
 package org.ogasimli.healthbarview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,5 +11,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        HealthBarView view = findViewById(R.id.healthbarview_java);
+
+        // Label
+        view.setShowLabel(true);
+        view.setLabelTextColor(R.color.colorPrimaryDark);
+        view.setLabelTextSize(16);
+        view.setLabelFont(R.font.lato_light_italic);
+        //view.setLabelFont(Typeface.create(Typeface.SERIF, Typeface.ITALIC));
+        view.setLabels(new String[]{"Bad", "Good", "Better", "Best"});
+        //view.setLabels("Bad,Good,Better,Best", Pattern.quote(","));
+
+        // Value
+        view.setShowValue(true);
+        view.setValueTextColor(R.color.colorPrimaryDark);
+        view.setValueTextSize(16);
+        view.setValueFont(R.font.lato_light_italic);
+        //view.setValueFont(Typeface.create(Typeface.SERIF, Typeface.ITALIC));
+        view.setValueSuffix("%");
+        view.setValueDecimalFormat(new DecimalFormat("0.0"));
+
+        // Bar Indicator
+        view.setIndicatorWidth(0.5f);
+        view.setIndicatorColor(R.color.colorPrimaryDark);
+
+        // Bar Stroke
+        view.setStrokeWidth(1);
+        view.setStrokeColor(R.color.colorPrimaryDark);
+
+        // Bar colors
+        view.setColorFrom(R.color.colorPrimary);
+        view.setColorTo(R.color.colorAccent);
+
+        // Animation
+        view.setAnimated(true);
+        view.setAnimationDuration(4000);
+
+        // Setting min value resets value to min value. Therefore, min value should be set before
+        // setting the value.
+        view.setMinValue(-20);
+        view.setMaxValue(34);
+        view.setValue(20f);
     }
 }
