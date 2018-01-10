@@ -2,9 +2,11 @@
 
 [![Download](https://api.bintray.com/packages/ogasimli/custom_view/HealtBarView/images/download.svg)](https://bintray.com/ogasimli/custom_view/HealtBarView/_latestVersion)
 
-`HealthBarView` is light library to indicate ViewPager's selected page with different animations and ability to customise it as you need.
+`HealthBarView` is light and fully customizable custom view to draw horizontal bar, fill it with gradientcolor, set value and determine value label automatically based on the provided labels set.
 
 ![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/main_animation.gif)
+
+![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/main_screen.png)
 
 ## Integration
 
