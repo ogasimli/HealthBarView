@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.support.annotation.FontRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
@@ -668,9 +669,9 @@ public class HealthBarView extends View {
 
     private void setupValuePaint() {
         mValuePaint.setAntiAlias(true);
-        mLabelPaint.setTypeface(mValueFont);
-        mValuePaint.setColor(mLabelTextColor);
-        mValuePaint.setTextSize(mLabelTextSize);
+        mValuePaint.setTypeface(mValueFont);
+        mValuePaint.setColor(mValueTextColor);
+        mValuePaint.setTextSize(mValueTextSize);
     }
 
     private void setupIndicatorPaint() {
@@ -701,6 +702,7 @@ public class HealthBarView extends View {
 
     public void setLabelTextColor(int labelTextColor) {
         mLabelTextColor = labelTextColor;
+        mLabelPaint.setColor(mLabelTextColor);
         invalidate();
     }
 
@@ -710,6 +712,7 @@ public class HealthBarView extends View {
 
     public void setLabelTextSize(int labelTextSize) {
         mLabelTextSize = labelTextSize;
+        mLabelPaint.setTextSize(mLabelTextSize);
         requestLayout();
     }
 
@@ -742,11 +745,13 @@ public class HealthBarView extends View {
 
     public void setLabelFont(Typeface labelFont) {
         mLabelFont = labelFont;
+        mLabelPaint.setTypeface(mLabelFont);
         requestLayout();
     }
 
-    public void setLabelFont(int labelFont) {
+    public void setLabelFont(@FontRes int labelFont) {
         mLabelFont = ResourcesCompat.getFont(mContext, labelFont);
+        mLabelPaint.setTypeface(mLabelFont);
         requestLayout();
     }
 
@@ -765,6 +770,7 @@ public class HealthBarView extends View {
 
     public void setValueTextColor(int valueTextColor) {
         mValueTextColor = valueTextColor;
+        mValuePaint.setColor(mValueTextColor);
         invalidate();
     }
 
@@ -774,6 +780,7 @@ public class HealthBarView extends View {
 
     public void setValueTextSize(int valueTextSize) {
         mValueTextSize = valueTextSize;
+        mValuePaint.setTextSize(mValueTextSize);
         requestLayout();
     }
 
@@ -849,11 +856,13 @@ public class HealthBarView extends View {
 
     public void setValueFont(Typeface valueFont) {
         mValueFont = valueFont;
+        mValuePaint.setTypeface(mValueFont);
         requestLayout();
     }
 
     public void setValueFont(int valueFont) {
         mValueFont = ResourcesCompat.getFont(mContext, valueFont);
+        mValuePaint.setTypeface(mValueFont);
         requestLayout();
     }
 
@@ -863,6 +872,7 @@ public class HealthBarView extends View {
 
     public void setIndicatorWidth(int indicatorWidth) {
         mIndicatorWidth = indicatorWidth;
+        mIndicatorPaint.setStrokeWidth(mIndicatorWidth);
         requestLayout();
     }
 
@@ -872,6 +882,7 @@ public class HealthBarView extends View {
 
     public void setIndicatorColor(int indicatorColor) {
         mIndicatorColor = indicatorColor;
+        mIndicatorPaint.setColor(mIndicatorColor);
         invalidate();
     }
 
@@ -881,6 +892,7 @@ public class HealthBarView extends View {
 
     public void setStrokeWidth(int strokeWidth) {
         mStrokeWidth = strokeWidth;
+        mBarStrokePaint.setStrokeWidth(mStrokeWidth);
         requestLayout();
     }
 
@@ -890,6 +902,7 @@ public class HealthBarView extends View {
 
     public void setStrokeColor(int strokeColor) {
         mStrokeColor = strokeColor;
+        mBarStrokePaint.setColor(mStrokeColor);
         invalidate();
     }
 
