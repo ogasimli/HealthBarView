@@ -5,6 +5,7 @@ import org.ogasimli.healthbarview.library.R;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -16,6 +17,7 @@ import android.graphics.Typeface;
 import android.support.annotation.FontRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -630,6 +632,21 @@ public class HealthBarView extends View {
         return result;
     }
 
+    /**
+     * Extract color int from color resource id and return it
+     *
+     * @param color the int value representing either color int, or color resource id
+     * @return the color
+     */
+    private int colorSetter(int color) {
+        try {
+            return ContextCompat.getColor(mContext, color);
+        } catch (Resources.NotFoundException e) {
+            Log.d(LOG_TAG, "Color resource not found.");
+            return color;
+        }
+    }
+
     //endregion helper
     //----------------------------------
 
@@ -701,7 +718,7 @@ public class HealthBarView extends View {
     }
 
     public void setLabelTextColor(int labelTextColor) {
-        mLabelTextColor = labelTextColor;
+        mLabelTextColor = colorSetter(labelTextColor);
         mLabelPaint.setColor(mLabelTextColor);
         invalidate();
     }
@@ -769,7 +786,7 @@ public class HealthBarView extends View {
     }
 
     public void setValueTextColor(int valueTextColor) {
-        mValueTextColor = valueTextColor;
+        mValueTextColor = colorSetter(valueTextColor);
         mValuePaint.setColor(mValueTextColor);
         invalidate();
     }
@@ -860,7 +877,7 @@ public class HealthBarView extends View {
         requestLayout();
     }
 
-    public void setValueFont(int valueFont) {
+    public void setValueFont(@FontRes int valueFont) {
         mValueFont = ResourcesCompat.getFont(mContext, valueFont);
         mValuePaint.setTypeface(mValueFont);
         requestLayout();
@@ -881,7 +898,7 @@ public class HealthBarView extends View {
     }
 
     public void setIndicatorColor(int indicatorColor) {
-        mIndicatorColor = indicatorColor;
+        mIndicatorColor = colorSetter(indicatorColor);
         mIndicatorPaint.setColor(mIndicatorColor);
         invalidate();
     }
@@ -901,7 +918,7 @@ public class HealthBarView extends View {
     }
 
     public void setStrokeColor(int strokeColor) {
-        mStrokeColor = strokeColor;
+        mStrokeColor = colorSetter(strokeColor);
         mBarStrokePaint.setColor(mStrokeColor);
         invalidate();
     }
@@ -911,7 +928,7 @@ public class HealthBarView extends View {
     }
 
     public void setColorFrom(int colorFrom) {
-        mColorFrom = colorFrom;
+        mColorFrom = colorSetter(colorFrom);
         invalidate();
     }
 
@@ -920,7 +937,7 @@ public class HealthBarView extends View {
     }
 
     public void setColorTo(int colorTo) {
-        mColorTo = colorTo;
+        mColorTo = colorSetter(colorTo);
         invalidate();
     }
 
