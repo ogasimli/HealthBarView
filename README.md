@@ -2,15 +2,33 @@
 
 [![Download](https://api.bintray.com/packages/ogasimli/custom_view/HealtBarView/images/download.svg)](https://bintray.com/ogasimli/custom_view/HealtBarView/_latestVersion)
 
-`HealthBarView` is light and fully customizable and animated custom view to draw horizontal bar, fill it with gradient color, set value and determine value label automatically based on the provided labels set.
+Before starting let me admit that I am not very good at choosing the names for my projects, classes, variables, etc. The name of this library - `HealthBarView` doesn't reflect the nature of the library very good. But I think that finding the suitable name for this project will be a pain even for a person with good naming skills. And the reason is the very specific task that this view accomplishes.
+
+So, what is this `HealthBarView` intended for?
+
+To make it clear let's first take a look at below screenshots.
 
 ![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/main_animation.gif)
 
 ![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/main_screen.png)
 
+Briefly, `HealthBarView` is determining the position of the values within a horizontal bar, which represents the range, maps the value to a corresponding label and draws it in a beautiful and customizable manner.
+
+To make it clear let's imagine that you have attended an exam and received 75 points out of possible 100. Also, let's assume that students get A, B, C, D or E mark depending on their points and the ranges for this marks are as following:
+
+* A -> 80-100
+* B -> 60-80
+* C -> 40-60
+* D -> 20-40
+* E -> 0-20
+
+So, according to the above, you will get B mark, since your point is within 60-80 range. To show this result in `HealthBarView` you have to set your minValue equal to 0 (default value is 0, therefore setting minValue can be omitted for this case), maxValue equal to 100 (default value is 100, therefore setting maxValue actually can be omitted this time), set value equal to 75 (default value is 0) and finally set your labels set equal to "A, B, C, D, E". The library will do the rest. It will automatically detect the matching label for the provided value, determine the position of the indicator within the bar and draw all necessary components.
+
+>***Note***: Currently the library determines the ranges automatically based on the number of provided labels and the absolute difference between minValue and maxValue. The possibility of adding custom ranges set will be added in future releases. Please see the [TODO](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/TODO.md) file for the full list of intended features.
+
 ## Integration
 
-To add `HealthBarView` to your project, first make sure in root `build.gradle` you have specified the following repository:
+To add `HealthBarView` to your project, first make sure that the following repository is added to you root `build.gradle`:
 
   ```groovy
     repositories {
@@ -18,22 +36,16 @@ To add `HealthBarView` to your project, first make sure in root `build.gradle` y
     }
   ```
 
->***Note***: by creating new project in Android Studio it will have `jcenter` repository specified by default, so you will not need to add it manually.
+>***Note***: If you have created the project using the Android Studio, `jcenter` repository probably has been added automatically by the IDE, so you will not need to add it manually.
 
-Once you make sure you have `jcenter` repository in your project, all you need to do is to add the following line in `dependencies` section of your project `build.gradle`.
+Once you make sure you have `jcenter` repository in your project, all you need to do is to add the following line in `dependencies` section of your project level `build.gradle`.
 
 See latest library version [![Download](https://api.bintray.com/packages/ogasimli/custom_view/HealtBarView/images/download.svg?version=0.1.0)](https://bintray.com/ogasimli/custom_view/HealtBarView/0.1.0/link)
 
  ```groovy
 compile 'org.ogasimli:healthbarview:X.X.X'
  ```
-If your project already use `appcompat-v7` support library, you can omit `HealthBarView` dependencies by adding a single .aar file to your project, that will decrease total amount of methods used in your project.
-
- ```groovy
- compile 'org.ogasimli:healthbarview:X.X.X@aar'
- ```
-
-Keep in mind, that `HealthBarView` has min [API level 14](https://developer.android.com/about/dashboards/index.html) and these dependencies:
+Keep in mind, that `HealthBarView` has min [API level 14](https://developer.android.com/about/dashboards/index.html) and uses these dependencies:
 
  ```groovy
  compile 'com.android.support:appcompat-v7:27.0.2'
@@ -43,7 +55,7 @@ Keep in mind, that `HealthBarView` has min [API level 14](https://developer.andr
 
 Usage of `HealthBarView` is quite simple. All you need to do is to declare a view in your `layout.xml` - that's it!
 
-`HealthBarView` is fully customizable both from xml and Java.
+`HealthBarView` is fully customizable both from XML and Java.
 
 Customization of HealthBarView from XML layout:
 
@@ -123,18 +135,18 @@ view.setValue(20f);
 
 >***Note***: Calling `setMinValue()` resets value of `HealthBarView` and sets it equal to `minValue`. Therefore, `setMinValue()` method should be called before `setValue()`.
 
-As you may see from the above code, `HealthBarView` consists of 4 componenets:
+As you may see from the above code, `HealthBarView` consists of 4 components:
 
     1.Value
     2.Label
-    3. Indicator
-    4. Bar
-    5. Stroke
+    3.Indicator
+    4.Bar
+    5.Stroke
 
 In below picture you can see the above elements:
-![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/elements.gif)
+![](https://raw.githubusercontent.com/ogasimli/HealthBarView/master/misc/assets/elements.png)
 
-Each of these componenets has their own properties. In below table you can find the properties of each componenet.
+Each of these components has their own properties. In below table you can find the properties of each component.
 
 | Component | Property               | Type      | Default value                                           |
 |-----------|------------------------|-----------|---------------------------------------------------------|
