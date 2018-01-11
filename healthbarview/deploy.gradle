@@ -27,7 +27,7 @@
 
 def pkgGroup = 'org.ogasimli'
 def pkgVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
-def pkgVersionDescription = 'Initial release'
+def pkgVersionDescription = "Release: v$pkgVersion"
 def pkgRepo = 'custom_view'
 def pkgName = 'HealtBarView'
 def pkgUserOrg = 'ogasimli'
