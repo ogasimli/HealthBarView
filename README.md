@@ -40,7 +40,7 @@ To add `HealthBarView` to your project, first make sure that the following repos
 
 Once you make sure you have `jcenter` repository in your project, all you need to do is to add the following line in `dependencies` section of your project level `build.gradle`.
 
-See latest library version [![Download](https://api.bintray.com/packages/ogasimli/custom_view/HealtBarView/images/download.svg?version=0.1.0)](https://bintray.com/ogasimli/custom_view/HealtBarView/0.1.0/link)
+See latest library version [![Download](https://api.bintray.com/packages/ogasimli/custom_view/HealtBarView/images/download.svg)](https://bintray.com/ogasimli/custom_view/HealtBarView/_latestVersion)
 
  ```groovy
 compile 'org.ogasimli:healthbarview:X.X.X'
