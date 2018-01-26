@@ -347,10 +347,6 @@ public class HealthBarView extends View {
 
         /* -------------- Value attributes -------------- */
 
-        if (a.hasValue(R.styleable.HealthBarView_hbv_value)) {
-            setValue(a.getFloat(R.styleable.HealthBarView_hbv_value, Value.DEFAULT_VALUE));
-        }
-
         if (a.hasValue(R.styleable.HealthBarView_hbv_showValue)) {
             setShowValue(a.getBoolean(R.styleable.HealthBarView_hbv_showValue,
                     Value.DEFAULT_VISIBILITY));
@@ -391,6 +387,10 @@ public class HealthBarView extends View {
             } catch (Exception exception) {
                 Log.w(LOG_TAG, exception.getMessage());
             }
+        }
+
+        if (a.hasValue(R.styleable.HealthBarView_hbv_value)) {
+            setValue(a.getFloat(R.styleable.HealthBarView_hbv_value, Value.DEFAULT_VALUE));
         }
 
         /* -------------- End of value attributes -------------- */
