@@ -1,31 +1,32 @@
-package org.ogasimli.healthbarview.model;
-
-import org.ogasimli.healthbarview.Util;
+package org.ogasimli.healthbarview;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.support.annotation.FontRes;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextPaint;
 import android.view.View;
 
 import java.text.DecimalFormat;
 
 /**
- * POJO class holding configurations of minValue
+ * Class holding configurations of minValue element
  *
  * @author Orkhan Gasimli on 24.01.2018.
  */
-public class MinValue extends BaseValue {
+class MinValue extends BaseValue {
 
     //----------------------------------
     // Static fields used as default config values
 
-    public static final boolean DEFAULT_VISIBILITY = false;
+    static final boolean DEFAULT_VISIBILITY = false;
 
-    public static final int DEFAULT_TEXT_COLOR = 0xff009688;
+    static final int DEFAULT_TEXT_COLOR = 0xff009688;
 
-    public static final int DEFAULT_TEXT_SIZE = Util.spToPx(16);
+    static final int DEFAULT_TEXT_SIZE = Util.spToPx(16);
 
-    public static final int DEFAULT_VALUE = 0;
+    static final int DEFAULT_VALUE = 0;
 
     private static final String DEFAULT_SUFFIX = "";
 
@@ -51,10 +52,10 @@ public class MinValue extends BaseValue {
     //----------------------------------
     // Constructors
 
-    public MinValue(View view, Context context, boolean showValue, int valueTextColor,
+    MinValue(View view, Context context, boolean isVisible, int valueTextColor,
                     int valueTextSize, float value, String valueSuffix, Typeface valueFont,
                     DecimalFormat decimalFormat) {
-        super(showValue,
+        super(isVisible,
                 valueTextColor,
                 valueTextSize,
                 value,
@@ -66,7 +67,7 @@ public class MinValue extends BaseValue {
         mPaint = setupPaint();
     }
 
-    public MinValue(View view, Context context) {
+    MinValue(View view, Context context) {
         super(DEFAULT_VISIBILITY,
                 DEFAULT_TEXT_COLOR,
                 DEFAULT_TEXT_SIZE,
@@ -79,7 +80,7 @@ public class MinValue extends BaseValue {
         mPaint = setupPaint();
     }
 
-    public MinValue(View view, Context context, float value) {
+    MinValue(View view, Context context, float value) {
         super(DEFAULT_VISIBILITY,
                 DEFAULT_TEXT_COLOR,
                 DEFAULT_TEXT_SIZE,
@@ -119,32 +120,32 @@ public class MinValue extends BaseValue {
     //----------------------------------
     // Setter & getters
 
-    public View getView() {
+    View getView() {
         return mView;
     }
 
-    public TextPaint getPaint() {
+    TextPaint getPaint() {
         return mPaint;
     }
 
-    public String getTextToDraw() {
+    String getTextToDraw() {
         return Util.formatValueText(getValue(), getSuffix(), getDecimalFormat());
     }
 
     @Override
-    public void setValue(float value) {
+    void setValue(float value) {
         super.setValue(value);
         mView.invalidate();
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    void setVisible(boolean visible) {
         super.setVisible(visible);
         mView.requestLayout();
     }
 
     @Override
-    public void setTextColor(int textColor) {
+    void setTextColor(int textColor) {
         int color = Util.colorSetter(mContext, textColor);
         super.setTextColor(color);
         mPaint.setColor(color);
@@ -152,14 +153,18 @@ public class MinValue extends BaseValue {
     }
 
     @Override
-    public void setTextSize(int textSize) {
+    void setTextSize(int textSize) {
         super.setTextSize(textSize);
         mPaint.setTextSize(textSize);
         mView.requestLayout();
     }
 
+    void setTextSize(float textSize) {
+        setTextSize(Util.spToPx(textSize));
+    }
+
     @Override
-    public void setSuffix(String suffix) {
+    void setSuffix(String suffix) {
         if (suffix != null) {
             super.setSuffix(suffix);
             mView.requestLayout();
@@ -167,14 +172,22 @@ public class MinValue extends BaseValue {
     }
 
     @Override
-    public void setFont(Typeface font) {
+    void setFont(Typeface font) {
         super.setFont(font);
         mPaint.setTypeface(font);
         mView.requestLayout();
     }
 
+    void setFont(@FontRes int font) {
+        try {
+            setFont(ResourcesCompat.getFont(mContext, font));
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public void setDecimalFormat(DecimalFormat decimalFormat) {
+    void setDecimalFormat(DecimalFormat decimalFormat) {
         if (decimalFormat != null) {
             super.setDecimalFormat(decimalFormat);
             mView.requestLayout();

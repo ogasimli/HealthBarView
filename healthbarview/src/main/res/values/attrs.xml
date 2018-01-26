@@ -31,6 +31,8 @@
         // Indicator
         <attr name="hbv_indicatorWidth" format="dimension"/>
         <attr name="hbv_indicatorColor" format="color"/>
+        <attr name="hbv_indicatorTopOverflow" format="dimension"/>
+        <attr name="hbv_indicatorBottomOverflow" format="dimension"/>
 
         // Value
         <attr name="hbv_value" format="float"/>

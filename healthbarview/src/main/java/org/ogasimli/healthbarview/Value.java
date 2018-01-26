@@ -1,32 +1,33 @@
-package org.ogasimli.healthbarview.model;
-
-import org.ogasimli.healthbarview.Util;
+package org.ogasimli.healthbarview;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.support.annotation.FontRes;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextPaint;
 import android.view.View;
 
 import java.text.DecimalFormat;
 
 /**
- * POJO class holding configurations of value
+ * Class holding configurations of value element
  *
  * @author Orkhan Gasimli on 24.01.2018.
  */
-public class Value extends BaseValue {
+class Value extends BaseValue {
 
     //----------------------------------
     // Static fields used as default config values
 
-    public static final boolean DEFAULT_VISIBILITY = true;
+    static final boolean DEFAULT_VISIBILITY = true;
 
-    public static final int DEFAULT_TEXT_COLOR = 0xff009688;
+    static final int DEFAULT_TEXT_COLOR = 0xff009688;
 
-    public static final int DEFAULT_TEXT_SIZE = Util.spToPx(16);
+    static final int DEFAULT_TEXT_SIZE = Util.spToPx(16);
 
-    public static final int DEFAULT_VALUE = 0;
+    static final int DEFAULT_VALUE = 0;
 
     private static final String DEFAULT_SUFFIX = "";
 
@@ -34,9 +35,9 @@ public class Value extends BaseValue {
 
     private static final DecimalFormat DEFAULT_DECIMAL_FORMAT = new DecimalFormat("0");
 
-    public static final boolean DEFAULT_ANIMATION = false;
+    static final boolean DEFAULT_ANIMATION = false;
 
-    public static final long DEFAULT_ANIMATION_DURATION = 4000L;
+    static final long DEFAULT_ANIMATION_DURATION = 4000L;
 
     // endregion static fields
     //----------------------------------
@@ -64,25 +65,25 @@ public class Value extends BaseValue {
     //----------------------------------
     // Constructors
 
-    public Value(View view, Context context, boolean showValue, int valueTextColor,
+    Value(View view, Context context, boolean isVisible, int valueTextColor,
                  int valueTextSize, float value, String valueSuffix, Typeface valueFont,
                  DecimalFormat decimalFormat, boolean isAnimated, long animationDuration) {
-        super(showValue,
+        super(isVisible,
                 valueTextColor,
                 valueTextSize,
                 value,
                 valueSuffix,
                 valueFont,
                 decimalFormat);
-        mView = view;
-        mContext = context;
         mIsAnimated = isAnimated;
         mValueToDraw = DEFAULT_VALUE;
         mAnimationDuration = animationDuration;
+        mView = view;
+        mContext = context;
         mPaint = setupPaint();
     }
 
-    public Value(View view, Context context) {
+    Value(View view, Context context) {
         super(DEFAULT_VISIBILITY,
                 DEFAULT_TEXT_COLOR,
                 DEFAULT_TEXT_SIZE,
@@ -90,15 +91,15 @@ public class Value extends BaseValue {
                 DEFAULT_SUFFIX,
                 DEFAULT_FONT,
                 DEFAULT_DECIMAL_FORMAT);
-        mView = view;
-        mContext = context;
         mIsAnimated = DEFAULT_ANIMATION;
         mValueToDraw = DEFAULT_VALUE;
         mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+        mView = view;
+        mContext = context;
         mPaint = setupPaint();
     }
 
-    public Value(View view, Context context, float value) {
+    Value(View view, Context context, float value) {
         super(DEFAULT_VISIBILITY,
                 DEFAULT_TEXT_COLOR,
                 DEFAULT_TEXT_SIZE,
@@ -106,11 +107,11 @@ public class Value extends BaseValue {
                 DEFAULT_SUFFIX,
                 DEFAULT_FONT,
                 DEFAULT_DECIMAL_FORMAT);
-        mView = view;
-        mContext = context;
         mIsAnimated = DEFAULT_ANIMATION;
         mValueToDraw = DEFAULT_VALUE;
         mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+        mView = view;
+        mContext = context;
         mPaint = setupPaint();
     }
 
@@ -141,26 +142,26 @@ public class Value extends BaseValue {
     //----------------------------------
     // Setter & getters
 
-    public View getView() {
+    View getView() {
         return mView;
     }
 
-    public TextPaint getPaint() {
+    TextPaint getPaint() {
         return mPaint;
     }
 
-    public String getTextToDraw() {
+    String getTextToDraw() {
         return Util.formatValueText(getValueToDraw(), getSuffix(), getDecimalFormat());
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    void setVisible(boolean visible) {
         super.setVisible(visible);
         mView.requestLayout();
     }
 
     @Override
-    public void setTextColor(int textColor) {
+    void setTextColor(int textColor) {
         int color = Util.colorSetter(mContext, textColor);
         super.setTextColor(color);
         mPaint.setColor(color);
@@ -168,18 +169,22 @@ public class Value extends BaseValue {
     }
 
     @Override
-    public void setTextSize(int textSize) {
+    void setTextSize(int textSize) {
         super.setTextSize(textSize);
         mPaint.setTextSize(textSize);
         mView.requestLayout();
     }
 
+    void setTextSize(float textSize) {
+        setTextSize(Util.spToPx(textSize));
+    }
+
     @Override
-    public void setValue(float value) {
+    void setValue(float value) {
         super.setValue(value);
     }
 
-    public void setValue(float value, float mMinValue, float mMaxValue) {
+    void setValue(float value, float mMinValue, float mMaxValue) {
         float previousValue = getValue();
         if (Util.isBetween(value, mMinValue, mMaxValue)) {
             setValue(value);
@@ -213,7 +218,7 @@ public class Value extends BaseValue {
     }
 
     @Override
-    public void setSuffix(String suffix) {
+    void setSuffix(String suffix) {
         if (suffix != null) {
             super.setSuffix(suffix);
             mView.requestLayout();
@@ -221,37 +226,45 @@ public class Value extends BaseValue {
     }
 
     @Override
-    public void setFont(Typeface font) {
+    void setFont(Typeface font) {
         super.setFont(font);
         mPaint.setTypeface(font);
         mView.requestLayout();
     }
 
+    void setFont(@FontRes int font) {
+        try {
+            setFont(ResourcesCompat.getFont(mContext, font));
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public void setDecimalFormat(DecimalFormat decimalFormat) {
+    void setDecimalFormat(DecimalFormat decimalFormat) {
         if (decimalFormat != null) {
             super.setDecimalFormat(decimalFormat);
             mView.requestLayout();
         }
     }
 
-    public boolean isAnimated() {
+    boolean isAnimated() {
         return mIsAnimated;
     }
 
-    public void setAnimated(boolean animated) {
+    void setAnimated(boolean animated) {
         mIsAnimated = animated;
     }
 
-    public float getValueToDraw() {
+    float getValueToDraw() {
         return mValueToDraw;
     }
 
-    public long getAnimationDuration() {
+    long getAnimationDuration() {
         return mAnimationDuration;
     }
 
-    public void setAnimationDuration(long animationDuration) {
+    void setAnimationDuration(long animationDuration) {
         mAnimationDuration = animationDuration;
     }
 }

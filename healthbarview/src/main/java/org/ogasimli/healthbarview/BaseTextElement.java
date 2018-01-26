@@ -1,4 +1,4 @@
-package org.ogasimli.healthbarview.model;
+package org.ogasimli.healthbarview;
 
 import android.graphics.Typeface;
 
@@ -7,7 +7,7 @@ import android.graphics.Typeface;
  *
  * @author Orkhan Gasimli on 24.01.2018.
  */
-public abstract class BaseTextElement {
+abstract class BaseTextElement {
 
     //----------------------------------
     // Member variables of the class
@@ -18,8 +18,6 @@ public abstract class BaseTextElement {
 
     private int mTextSize;
 
-    private float mValue;
-
     private Typeface mFont;
 
     // endregion member variables
@@ -28,11 +26,10 @@ public abstract class BaseTextElement {
     //----------------------------------
     // Constructors
 
-    BaseTextElement(boolean isVisible, int textColor, int textSize, float value, Typeface font) {
+    BaseTextElement(boolean isVisible, int textColor, int textSize, Typeface font) {
         mIsVisible = isVisible;
         mTextColor = textColor;
         mTextSize = textSize;
-        mValue = value;
         mFont = font;
     }
 
@@ -42,43 +39,35 @@ public abstract class BaseTextElement {
     //----------------------------------
     // Setter & getters
 
-    public boolean isVisible() {
+    boolean isVisible() {
         return mIsVisible;
     }
 
-    public void setVisible(boolean visible) {
+    void setVisible(boolean visible) {
         mIsVisible = visible;
     }
 
-    public int getTextColor() {
+    int getTextColor() {
         return mTextColor;
     }
 
-    public void setTextColor(int textColor) {
+    void setTextColor(int textColor) {
         mTextColor = textColor;
     }
 
-    public int getTextSize() {
+    int getTextSize() {
         return mTextSize;
     }
 
-    public void setTextSize(int textSize) {
+    void setTextSize(int textSize) {
         mTextSize = textSize;
     }
 
-    public float getValue() {
-        return mValue;
-    }
-
-    public void setValue(float value) {
-        mValue = value;
-    }
-
-    public Typeface getFont() {
+    Typeface getFont() {
         return mFont;
     }
 
-    public void setFont(Typeface font) {
+    void setFont(Typeface font) {
         mFont = font;
     }
 

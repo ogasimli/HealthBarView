@@ -15,7 +15,7 @@ import java.text.DecimalFormat;
  *
  * @author Orkhan Gasimli on 25.12.2017.
  */
-public final class Util {
+final class Util {
 
     private static final String LOG_TAG = Util.class.getSimpleName();
 
@@ -36,7 +36,7 @@ public final class Util {
      * @param sp the scaled pixel value
      * @return the pixel value
      */
-    public static int spToPx(float sp) {
+    static int spToPx(float sp) {
         float density = Resources.getSystem().getDisplayMetrics().scaledDensity;
         return Math.round(sp * density);
     }
@@ -48,7 +48,7 @@ public final class Util {
      * @param v1    the first number
      * @param v2    the second number
      */
-    public static boolean isBetween(float value, float v1, float v2) {
+    static boolean isBetween(float value, float v1, float v2) {
         // Determine the minimum of these two numbers
         float min = Math.min(v1, v2);
         // Determine the maximum of these two numbers
@@ -64,7 +64,7 @@ public final class Util {
      * @param decimalFormat the decimal format
      * @return the formatted value
      */
-    public static @NonNull
+    static @NonNull
     String formatValueText(float value, String suffix, DecimalFormat decimalFormat) {
         String result = decimalFormat.format(value);
         if (suffix != null) result += suffix;
@@ -77,7 +77,7 @@ public final class Util {
      * @param color the int value representing either color int, or color resource id
      * @return the color
      */
-    public static int colorSetter(Context context, int color) {
+    static int colorSetter(Context context, int color) {
         try {
             return ContextCompat.getColor(context, color);
         } catch (Resources.NotFoundException e) {
@@ -92,7 +92,7 @@ public final class Util {
      * @param text  the string to be drawn
      * @param paint the paint object that will draw the text
      */
-    public static int determineTextWidth(String text, Paint paint, boolean isVisible) {
+    static int determineTextWidth(String text, Paint paint, boolean isVisible) {
         if (isVisible) {
             Rect bounds = new Rect();
             paint.getTextBounds(text, 0, text.length(), bounds);
@@ -106,7 +106,7 @@ public final class Util {
      *
      * @param paint the paint object that will draw the text
      */
-    public static int determineTextHeight(Paint paint, boolean isVisible) {
+    static int determineTextHeight(Paint paint, boolean isVisible) {
         if (isVisible) {
             // Get height from font metrics
             Paint.FontMetrics fm = paint.getFontMetrics();

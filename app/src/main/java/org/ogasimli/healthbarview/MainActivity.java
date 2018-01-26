@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         view.setStrokeColor(R.color.colorPrimaryDark);
 
         // Bar colors
-        view.setColorFrom(R.color.colorPrimary);
-        view.setColorTo(R.color.colorAccent);
+        view.setStartColor(R.color.colorPrimary);
+        view.setEndColor(R.color.colorAccent);
     }
 }

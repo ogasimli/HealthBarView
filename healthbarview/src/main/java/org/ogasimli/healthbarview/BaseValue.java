@@ -1,4 +1,4 @@
-package org.ogasimli.healthbarview.model;
+package org.ogasimli.healthbarview;
 
 import android.graphics.Typeface;
 
@@ -9,10 +9,12 @@ import java.text.DecimalFormat;
  *
  * @author Orkhan Gasimli on 24.01.2018.
  */
-public abstract class BaseValue extends BaseTextElement {
+abstract class BaseValue extends BaseTextElement {
 
     //----------------------------------
     // Member variables of the class
+
+    private float mValue;
 
     private String mSuffix;
 
@@ -26,7 +28,8 @@ public abstract class BaseValue extends BaseTextElement {
 
     BaseValue(boolean isVisible, int textColor, int textSize, float value,
               String suffix, Typeface font, DecimalFormat decimalFormat) {
-        super(isVisible, textColor, textSize, value, font);
+        super(isVisible, textColor, textSize, font);
+        mValue = value;
         mSuffix = suffix;
         mDecimalFormat = decimalFormat;
     }
@@ -37,19 +40,27 @@ public abstract class BaseValue extends BaseTextElement {
     //----------------------------------
     // Setter & getters
 
-    public String getSuffix() {
+    float getValue() {
+        return mValue;
+    }
+
+    void setValue(float value) {
+        mValue = value;
+    }
+
+    String getSuffix() {
         return mSuffix;
     }
 
-    public void setSuffix(String suffix) {
+    void setSuffix(String suffix) {
         mSuffix = suffix;
     }
 
-    public DecimalFormat getDecimalFormat() {
+    DecimalFormat getDecimalFormat() {
         return mDecimalFormat;
     }
 
-    public void setDecimalFormat(DecimalFormat decimalFormat) {
+    void setDecimalFormat(DecimalFormat decimalFormat) {
         mDecimalFormat = decimalFormat;
     }
 
