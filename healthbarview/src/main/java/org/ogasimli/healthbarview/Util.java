@@ -2,6 +2,8 @@ package org.ogasimli.healthbarview;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -11,9 +13,9 @@ import java.text.DecimalFormat;
 /**
  * Class holding view related static methods
  *
- * Created by Orkhan Gasimli on 25.12.2017.
+ * @author Orkhan Gasimli on 25.12.2017.
  */
-final class Util {
+public final class Util {
 
     private static final String LOG_TAG = Util.class.getSimpleName();
 
@@ -34,7 +36,7 @@ final class Util {
      * @param sp the scaled pixel value
      * @return the pixel value
      */
-    static int spToPx(float sp) {
+    public static int spToPx(float sp) {
         float density = Resources.getSystem().getDisplayMetrics().scaledDensity;
         return Math.round(sp * density);
     }
@@ -46,7 +48,7 @@ final class Util {
      * @param v1    the first number
      * @param v2    the second number
      */
-    static boolean isBetween(float value, float v1, float v2) {
+    public static boolean isBetween(float value, float v1, float v2) {
         // Determine the minimum of these two numbers
         float min = Math.min(v1, v2);
         // Determine the maximum of these two numbers
@@ -62,7 +64,7 @@ final class Util {
      * @param decimalFormat the decimal format
      * @return the formatted value
      */
-    static @NonNull
+    public static @NonNull
     String formatValueText(float value, String suffix, DecimalFormat decimalFormat) {
         String result = decimalFormat.format(value);
         if (suffix != null) result += suffix;
@@ -75,12 +77,41 @@ final class Util {
      * @param color the int value representing either color int, or color resource id
      * @return the color
      */
-    static int colorSetter(Context context, int color) {
+    public static int colorSetter(Context context, int color) {
         try {
             return ContextCompat.getColor(context, color);
         } catch (Resources.NotFoundException e) {
             Log.d(LOG_TAG, "Color resource not found.");
             return color;
         }
+    }
+
+    /**
+     * Calculate width of the text
+     *
+     * @param text  the string to be drawn
+     * @param paint the paint object that will draw the text
+     */
+    public static int determineTextWidth(String text, Paint paint, boolean isVisible) {
+        if (isVisible) {
+            Rect bounds = new Rect();
+            paint.getTextBounds(text, 0, text.length(), bounds);
+            return (int) ((paint.measureText(text) + bounds.width()) / 2);
+        }
+        return 0;
+    }
+
+    /**
+     * Calculate height of the text
+     *
+     * @param paint the paint object that will draw the text
+     */
+    public static int determineTextHeight(Paint paint, boolean isVisible) {
+        if (isVisible) {
+            // Get height from font metrics
+            Paint.FontMetrics fm = paint.getFontMetrics();
+            return (int) (fm.descent - fm.ascent);
+        }
+        return 0;
     }
 }
