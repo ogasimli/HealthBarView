@@ -440,13 +440,11 @@ public class HealthBarView extends View {
             mMinValueLeft = getPaddingLeft();
             mMinValueRight = mMinValueLeft + mMinValueWidth;
             mMinValueBottom = (float) ((mViewHeight - paddingBottom() -
-                    ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) -
-                    mLabelHeight - mStroke.getWidth() / 2) -
-                    (((mViewHeight - paddingBottom() -
-                            ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) -
+                    mIndicator.getTopOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
+                    (((mViewHeight - paddingBottom() - mIndicator.getTopOverflow() -
                             mLabelHeight - mStroke.getWidth() / 2) - (paddingTop() +
-                            ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) +
-                            mValueHeight + mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.0));
+                            mIndicator.getBottomOverflow() + mValueHeight +
+                            mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.5));
             mMinValueTop = mMinValueBottom - mMinValueHeight;
 
             // Draw
@@ -469,13 +467,11 @@ public class HealthBarView extends View {
             mMaxValueLeft = mViewWidth - getPaddingRight() - mMaxValueWidth;
             mMaxValueRight = mMaxValueLeft + mMaxValueWidth;
             mMaxValueBottom = (float) ((mViewHeight - paddingBottom() -
-                    ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) -
-                    mLabelHeight - mStroke.getWidth() / 2) -
-                    (((mViewHeight - paddingBottom() -
-                            ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) -
+                    mIndicator.getTopOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
+                    (((mViewHeight - paddingBottom() - mIndicator.getTopOverflow() -
                             mLabelHeight - mStroke.getWidth() / 2) - (paddingTop() +
-                            ((mIndicator.getTopOverflow() + mIndicator.getBottomOverflow()) / 2) +
-                            mValueHeight + mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.0));
+                            mIndicator.getBottomOverflow() + mValueHeight +
+                            mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.5));
             mMaxValueTop = mMaxValueBottom - mMaxValueHeight;
 
             // Draw
