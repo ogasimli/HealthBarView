@@ -52,6 +52,7 @@
         <attr name="hbv_labelTextSize" format="dimension"/>
         <attr name="hbv_labelFont" format="reference"/>
         <attr name="hbv_labels" format="string"/>
+        <attr name="hbv_labelsRange" format="string"/>
 
     </declare-styleable>
 </resources>

@@ -413,7 +413,12 @@ public class HealthBarView extends View {
         }
 
         if (a.hasValue(R.styleable.HealthBarView_hbv_labels)) {
-            setLabels(a.getString(R.styleable.HealthBarView_hbv_labels), Pattern.quote(","));
+            setLabels(a.getString(R.styleable.HealthBarView_hbv_labels), Pattern.quote("|"));
+        }
+
+        if (a.hasValue(R.styleable.HealthBarView_hbv_labelsRange)) {
+            setLabelsRange(a.getString(R.styleable.HealthBarView_hbv_labelsRange),
+                    Pattern.quote("|"));
         }
 
         if (a.hasValue(R.styleable.HealthBarView_hbv_labelFont)) {
@@ -1167,6 +1172,18 @@ public class HealthBarView extends View {
 
     public void setLabels(String labelsString, String regex) {
         mLabel.setLabels(labelsString, regex);
+    }
+
+    public double[] getLabelsRange() {
+        return mLabel.getLabelsRange();
+    }
+
+    public void setLabelsRange(double[] labelsRange) {
+        mLabel.setLabelsRange(labelsRange);
+    }
+
+    public void setLabelsRange(String labelsRangeString, String regex) {
+        mLabel.setLabelsRange(labelsRangeString, regex);
     }
 
     public String getLabel() {

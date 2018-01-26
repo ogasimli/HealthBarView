@@ -48,6 +48,8 @@ class Label  extends BaseTextElement {
 
     private String mLabelToDraw;
 
+    private double[] mLabelsRange;
+
     // endregion member variables
     //----------------------------------
 
@@ -185,6 +187,24 @@ class Label  extends BaseTextElement {
         mLabelToDraw = labelToDraw;
     }
 
+    double[] getLabelsRange() {
+        return mLabelsRange;
+    }
+
+    void setLabelsRange(double[] labelsRange) {
+        mLabelsRange = labelsRange;
+        mView.invalidate();
+    }
+
+    void setLabelsRange(String labelsString, String regex) {
+        List<String> ranges = Arrays.asList(labelsString.split(regex));
+        mLabelsRange = new double[ranges.size()];
+        for (int i = 0; i < ranges.size(); i++) {
+            mLabelsRange[i] = Double.parseDouble(ranges.get(i));
+        }
+        mView.invalidate();
+    }
+
     /**
      * Determine the label corresponding the value within the range from minValue to maxValue
      *
@@ -193,10 +213,19 @@ class Label  extends BaseTextElement {
      * @param maxValue the end point of range
      */
     void setLabelToDraw(float value, float minValue, float maxValue) {
-        if (minValue > maxValue) Collections.reverse(Arrays.asList(mLabels));
-        float fraction = Math.abs(maxValue - minValue) / mLabels.length;
-        int index = (int) (Math.abs(value - minValue) / fraction);
-        index = Math.min(index, mLabels.length - 1);
-        mLabelToDraw = mLabels[index];
+        if (mLabelsRange == null || mLabelsRange.length != mLabels.length) {
+            if (minValue > maxValue) Collections.reverse(Arrays.asList(mLabels));
+            float fraction = Math.abs(maxValue - minValue) / mLabels.length;
+            int index = (int) (Math.abs(value - minValue) / fraction);
+            index = Math.min(index, mLabels.length - 1);
+            mLabelToDraw = mLabels[index];
+        } else {
+            for (int i = 0; i < mLabelsRange.length; i++) {
+                if (value <= mLabelsRange[i]) {
+                    mLabelToDraw = mLabels[i];
+                    break;
+                }
+            }
+        }
     }
 }
