@@ -110,7 +110,6 @@ class Fill {
 
     void setStartColor(int startColor) {
         mStartColor = Util.colorSetter(mContext, startColor);
-        mPaint.setColor(startColor);
         mView.invalidate();
     }
 
@@ -120,7 +119,6 @@ class Fill {
 
     void setEndColor(int endColor) {
         mEndColor = Util.colorSetter(mContext, endColor);
-        mPaint.setColor(endColor);
         mView.invalidate();
     }
 }
