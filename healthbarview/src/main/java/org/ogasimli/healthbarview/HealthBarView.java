@@ -440,10 +440,10 @@ public class HealthBarView extends View {
             mMinValueLeft = getPaddingLeft();
             mMinValueRight = mMinValueLeft + mMinValueWidth;
             mMinValueBottom = (float) ((mViewHeight - paddingBottom() -
-                    mIndicator.getTopOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
-                    (((mViewHeight - paddingBottom() - mIndicator.getTopOverflow() -
+                    mIndicator.getBottomOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
+                    (((mViewHeight - paddingBottom() - mIndicator.getBottomOverflow() -
                             mLabelHeight - mStroke.getWidth() / 2) - (paddingTop() +
-                            mIndicator.getBottomOverflow() + mValueHeight +
+                            mIndicator.getTopOverflow() + mValueHeight +
                             mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.5));
             mMinValueTop = mMinValueBottom - mMinValueHeight;
 
@@ -467,10 +467,10 @@ public class HealthBarView extends View {
             mMaxValueLeft = mViewWidth - getPaddingRight() - mMaxValueWidth;
             mMaxValueRight = mMaxValueLeft + mMaxValueWidth;
             mMaxValueBottom = (float) ((mViewHeight - paddingBottom() -
-                    mIndicator.getTopOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
-                    (((mViewHeight - paddingBottom() - mIndicator.getTopOverflow() -
+                    mIndicator.getBottomOverflow() - mLabelHeight - mStroke.getWidth() / 2) -
+                    (((mViewHeight - paddingBottom() - mIndicator.getBottomOverflow() -
                             mLabelHeight - mStroke.getWidth() / 2) - (paddingTop() +
-                            mIndicator.getBottomOverflow() + mValueHeight +
+                            mIndicator.getTopOverflow() + mValueHeight +
                             mStroke.getWidth() / 2)) / 2) + (mMinValueHeight / 2.5));
             mMaxValueTop = mMaxValueBottom - mMaxValueHeight;
 
