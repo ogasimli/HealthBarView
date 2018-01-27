@@ -25,8 +25,8 @@
         <attr name="hbv_strokeWidth" format="dimension"/>
         <attr name="hbv_strokeColor" format="color"/>
         // Fill
-        <attr name="hbv_colorFrom" format="color"/>
-        <attr name="hbv_colorTo" format="color"/>
+        <attr name="hbv_startColor" format="color"/>
+        <attr name="hbv_endColor" format="color"/>
 
         // Indicator
         <attr name="hbv_indicatorWidth" format="dimension"/>

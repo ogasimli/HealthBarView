@@ -970,26 +970,6 @@ public class HealthBarView extends View {
 
     /* -------------- Bar fill attributes -------------- */
 
-    @Deprecated
-    public int getColorFrom() {
-        return mFill.getStartColor();
-    }
-
-    @Deprecated
-    public void setColorFrom(int colorFrom) {
-        mFill.setStartColor(colorFrom);
-    }
-
-    @Deprecated
-    public int getColorTo() {
-        return mFill.getEndColor();
-    }
-
-    @Deprecated
-    public void setColorTo(int colorTo) {
-        mFill.setEndColor(colorTo);
-    }
-
     public int getStartColor() {
         return mFill.getStartColor();
     }
