@@ -55,7 +55,7 @@ class Value extends BaseValue {
 
     private boolean mIsAnimated;
 
-    private float mValueToDraw; //for use during animation
+    private double mValueToDraw; //for use during animation
 
     private long mAnimationDuration; //default duration
 
@@ -180,12 +180,12 @@ class Value extends BaseValue {
     }
 
     @Override
-    void setValue(float value) {
+    void setValue(double value) {
         super.setValue(value);
     }
 
-    void setValue(float value, float mMinValue, float mMaxValue) {
-        float previousValue = getValue();
+    void setValue(double value, double mMinValue, double mMaxValue) {
+        double previousValue = getValue();
         if (Util.isBetween(value, mMinValue, mMaxValue)) {
             setValue(value);
         } else {
@@ -197,10 +197,10 @@ class Value extends BaseValue {
         }
 
         if (mIsAnimated) {
-            mAnimator = ValueAnimator.ofFloat(previousValue, getValue());
+            mAnimator = ValueAnimator.ofFloat((float) previousValue, (float) getValue());
             //animationDuration specifies how long it should take to animate the entire graph, so the
             //actual value to use depends on how much the value needs to change
-            float changeInValue = Math.abs(getValue() - previousValue);
+            double changeInValue = Math.abs(getValue() - previousValue);
             long durationToUse = (long) (mAnimationDuration * (changeInValue
                     / Math.max(mMinValue, mMaxValue)));
             mAnimator.setDuration(durationToUse);
@@ -256,7 +256,7 @@ class Value extends BaseValue {
         mIsAnimated = animated;
     }
 
-    float getValueToDraw() {
+    double getValueToDraw() {
         return mValueToDraw;
     }
 

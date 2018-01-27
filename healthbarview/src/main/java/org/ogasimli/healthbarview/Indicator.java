@@ -137,6 +137,10 @@ class Indicator {
         mView.requestLayout();
     }
 
+    void setTopOverflow(float topOverflow) {
+        setTopOverflow(Util.dpToPx(topOverflow));
+    }
+
     int getBottomOverflow() {
         return mBottomOverflow;
     }
@@ -144,5 +148,9 @@ class Indicator {
     void setBottomOverflow(int bottomOverflow) {
         mBottomOverflow = bottomOverflow;
         mView.requestLayout();
+    }
+
+    void setBottomOverflow(float bottomOverflow) {
+        setBottomOverflow(Util.dpToPx(bottomOverflow));
     }
 }

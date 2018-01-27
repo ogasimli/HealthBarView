@@ -212,10 +212,10 @@ class Label  extends BaseTextElement {
      * @param minValue the starting point of range
      * @param maxValue the end point of range
      */
-    void setLabelToDraw(float value, float minValue, float maxValue) {
+    void setLabelToDraw(double value, double minValue, double maxValue) {
         if (mLabelsRange == null || mLabelsRange.length != mLabels.length) {
             if (minValue > maxValue) Collections.reverse(Arrays.asList(mLabels));
-            float fraction = Math.abs(maxValue - minValue) / mLabels.length;
+            double fraction = Math.abs(maxValue - minValue) / mLabels.length;
             int index = (int) (Math.abs(value - minValue) / fraction);
             index = Math.min(index, mLabels.length - 1);
             mLabelToDraw = mLabels[index];

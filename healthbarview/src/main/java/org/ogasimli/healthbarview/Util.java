@@ -48,11 +48,11 @@ final class Util {
      * @param v1    the first number
      * @param v2    the second number
      */
-    static boolean isBetween(float value, float v1, float v2) {
+    static boolean isBetween(double value, double v1, double v2) {
         // Determine the minimum of these two numbers
-        float min = Math.min(v1, v2);
+        double min = Math.min(v1, v2);
         // Determine the maximum of these two numbers
-        float max = Math.max(v1, v2);
+        double max = Math.max(v1, v2);
         return value >= min && value <= max;
     }
 
@@ -65,7 +65,7 @@ final class Util {
      * @return the formatted value
      */
     static @NonNull
-    String formatValueText(float value, String suffix, DecimalFormat decimalFormat) {
+    String formatValueText(double value, String suffix, DecimalFormat decimalFormat) {
         String result = decimalFormat.format(value);
         if (suffix != null) result += suffix;
         return result;

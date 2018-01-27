@@ -133,7 +133,7 @@ class MaxValue extends BaseValue {
     }
 
     @Override
-    void setValue(float value) {
+    void setValue(double value) {
         super.setValue(value);
         mView.invalidate();
     }

@@ -308,13 +308,13 @@ public class HealthBarView extends View {
 
         /* -------------- Bar fill attributes -------------- */
 
-        if (a.hasValue(R.styleable.HealthBarView_hbv_colorFrom)) {
-            setStartColor(a.getInt(R.styleable.HealthBarView_hbv_colorFrom,
+        if (a.hasValue(R.styleable.HealthBarView_hbv_startColor)) {
+            setStartColor(a.getInt(R.styleable.HealthBarView_hbv_startColor,
                     Fill.DEFAULT_START_COLOR));
         }
 
-        if (a.hasValue(R.styleable.HealthBarView_hbv_colorTo)) {
-            setEndColor(a.getInt(R.styleable.HealthBarView_hbv_colorTo, Fill.DEFAULT_END_COLOR));
+        if (a.hasValue(R.styleable.HealthBarView_hbv_endColor)) {
+            setEndColor(a.getInt(R.styleable.HealthBarView_hbv_endColor, Fill.DEFAULT_END_COLOR));
         }
 
         /* -------------- End of bar fill attributes -------------- */
@@ -808,7 +808,7 @@ public class HealthBarView extends View {
 
     /* -------------- MinValue attributes -------------- */
 
-    public float getMinValue() {
+    public double getMinValue() {
         return mMinValue.getValue();
     }
 
@@ -821,63 +821,63 @@ public class HealthBarView extends View {
         return mMinValue.isVisible();
     }
 
-    public void setShowMinValue(boolean showValue) {
-        mMinValue.setVisible(showValue);
+    public void setShowMinValue(boolean showMinValue) {
+        mMinValue.setVisible(showMinValue);
     }
 
     public int getMinValueTextColor() {
         return mMinValue.getTextColor();
     }
 
-    public void setMinValueTextColor(int valueTextColor) {
-        mMinValue.setTextColor(valueTextColor);
+    public void setMinValueTextColor(int minValueTextColor) {
+        mMinValue.setTextColor(minValueTextColor);
     }
 
     public int getMinValueTextSize() {
         return mMinValue.getTextSize();
     }
 
-    private void setMinValueTextSize(int valueTextSize) {
-        mMinValue.setTextSize(valueTextSize);
+    private void setMinValueTextSize(int minValueTextSize) {
+        mMinValue.setTextSize(minValueTextSize);
     }
 
-    public void setMinValueTextSize(float valueTextSize) {
-        mMinValue.setTextSize(valueTextSize);
+    public void setMinValueTextSize(float minValueTextSize) {
+        mMinValue.setTextSize(minValueTextSize);
     }
 
     public String getMinValueSuffix() {
         return mMinValue.getSuffix();
     }
 
-    public void setMinValueSuffix(String valueSuffix) {
-        mMinValue.setSuffix(valueSuffix);
+    public void setMinValueSuffix(String minValueSuffix) {
+        mMinValue.setSuffix(minValueSuffix);
     }
 
     public Typeface getMinValueFont() {
         return mMinValue.getFont();
     }
 
-    public void setMinValueFont(Typeface valueFont) {
-        mMinValue.setFont(valueFont);
+    public void setMinValueFont(Typeface minValueFont) {
+        mMinValue.setFont(minValueFont);
     }
 
-    public void setMinValueFont(@FontRes int valueFont) {
-        mMinValue.setFont(valueFont);
+    public void setMinValueFont(@FontRes int minValueFont) {
+        mMinValue.setFont(minValueFont);
     }
 
     public DecimalFormat getMinValueDecimalFormat() {
         return mMinValue.getDecimalFormat();
     }
 
-    public void setMinValueDecimalFormat(DecimalFormat valueDecimalFormat) {
-        mMinValue.setDecimalFormat(valueDecimalFormat);
+    public void setMinValueDecimalFormat(DecimalFormat minValueDecimalFormat) {
+        mMinValue.setDecimalFormat(minValueDecimalFormat);
     }
 
     /* -------------- End of minValue attributes -------------- */
 
     /* -------------- MaxValue attributes -------------- */
 
-    public float getMaxValue() {
+    public double getMaxValue() {
         return mMaxValue.getValue();
     }
 
@@ -890,56 +890,56 @@ public class HealthBarView extends View {
         return mMaxValue.isVisible();
     }
 
-    public void setShowMaxValue(boolean showValue) {
-        mMaxValue.setVisible(showValue);
+    public void setShowMaxValue(boolean showMaxValue) {
+        mMaxValue.setVisible(showMaxValue);
     }
 
     public int getMaxValueTextColor() {
         return mMaxValue.getTextColor();
     }
 
-    public void setMaxValueTextColor(int valueTextColor) {
-        mMaxValue.setTextColor(valueTextColor);
+    public void setMaxValueTextColor(int maxValueTextColor) {
+        mMaxValue.setTextColor(maxValueTextColor);
     }
 
     public int getMaxValueTextSize() {
         return mMaxValue.getTextSize();
     }
 
-    private void setMaxValueTextSize(int valueTextSize) {
-        mMaxValue.setTextSize(valueTextSize);
+    private void setMaxValueTextSize(int maxValueTextSize) {
+        mMaxValue.setTextSize(maxValueTextSize);
     }
 
-    public void setMaxValueTextSize(float valueTextSize) {
-        mMaxValue.setTextSize(valueTextSize);
+    public void setMaxValueTextSize(float maxValueTextSize) {
+        mMaxValue.setTextSize(maxValueTextSize);
     }
 
     public String getMaxValueSuffix() {
         return mMaxValue.getSuffix();
     }
 
-    public void setMaxValueSuffix(String valueSuffix) {
-        mMaxValue.setSuffix(valueSuffix);
+    public void setMaxValueSuffix(String maxValueSuffix) {
+        mMaxValue.setSuffix(maxValueSuffix);
     }
 
     public Typeface getMaxValueFont() {
         return mMaxValue.getFont();
     }
 
-    public void setMaxValueFont(Typeface valueFont) {
-        mMaxValue.setFont(valueFont);
+    public void setMaxValueFont(Typeface maxValueFont) {
+        mMaxValue.setFont(maxValueFont);
     }
 
-    public void setMaxValueFont(@FontRes int valueFont) {
-        mMaxValue.setFont(valueFont);
+    public void setMaxValueFont(@FontRes int maxValueFont) {
+        mMaxValue.setFont(maxValueFont);
     }
 
     public DecimalFormat getMaxValueDecimalFormat() {
         return mMaxValue.getDecimalFormat();
     }
 
-    public void setMaxValueDecimalFormat(DecimalFormat valueDecimalFormat) {
-        mMaxValue.setDecimalFormat(valueDecimalFormat);
+    public void setMaxValueDecimalFormat(DecimalFormat maxValueDecimalFormat) {
+        mMaxValue.setDecimalFormat(maxValueDecimalFormat);
     }
 
     /* -------------- End of maxValue attributes -------------- */
@@ -1014,27 +1014,35 @@ public class HealthBarView extends View {
         return mIndicator.getTopOverflow();
     }
 
-    public void setIndicatorTopOverflow(int top) {
-        mIndicator.setTopOverflow(top);
+    public void setIndicatorTopOverflow(int topOverflow) {
+        mIndicator.setTopOverflow(topOverflow);
+    }
+
+    public void setIndicatorTopOverflow(float topOverflow) {
+        mIndicator.setTopOverflow(topOverflow);
     }
 
     public int getIndicatorBottomOverflow() {
         return mIndicator.getBottomOverflow();
     }
 
-    public void setIndicatorBottomOverflow(int bottom) {
-        mIndicator.setBottomOverflow(bottom);
+    public void setIndicatorBottomOverflow(int bottomOverflow) {
+        mIndicator.setBottomOverflow(bottomOverflow);
+    }
+
+    public void setIndicatorBottomOverflow(float bottomOverflow) {
+        mIndicator.setBottomOverflow(bottomOverflow);
     }
 
     /* -------------- End of indicator attributes -------------- */
 
     /* -------------- Value attributes -------------- */
 
-    public float getValue() {
+    public double getValue() {
         return mValue.getValue();
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         mValue.setValue(value, mMinValue.getValue(), mMaxValue.getValue());
     }
 

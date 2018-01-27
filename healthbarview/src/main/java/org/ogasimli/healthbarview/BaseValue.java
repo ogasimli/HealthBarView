@@ -14,7 +14,7 @@ abstract class BaseValue extends BaseTextElement {
     //----------------------------------
     // Member variables of the class
 
-    private float mValue;
+    private double mValue;
 
     private String mSuffix;
 
@@ -40,11 +40,11 @@ abstract class BaseValue extends BaseTextElement {
     //----------------------------------
     // Setter & getters
 
-    float getValue() {
+    double getValue() {
         return mValue;
     }
 
-    void setValue(float value) {
+    void setValue(double value) {
         mValue = value;
     }
 
