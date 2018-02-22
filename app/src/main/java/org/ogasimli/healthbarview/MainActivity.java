@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2018 Orkhan Gasimli - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ * This file is proprietary and confidential.
+ * Written by Orkhan Gasimli <orkhan.gasimli@gmail.com> in 2018.
+ */
+
 package org.ogasimli.healthbarview;
 
 import android.os.Bundle;
