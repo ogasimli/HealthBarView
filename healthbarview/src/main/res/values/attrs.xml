@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Orkhan Gasimli - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited.
+  ~ This file is proprietary and confidential.
+  ~ Written by Orkhan Gasimli <orkhan.gasimli@gmail.com> in 2018.
+  -->
+
 <resources>
     <declare-styleable name="HealthBarView">
-        // Label
-        <attr name="hbv_showLabel" format="boolean" />
-        <attr name="hbv_labelTextColor" format="color"/>
-        <attr name="hbv_labelTextSize" format="dimension"/>
-        <attr name="hbv_labelFont" format="reference"/>
-        <attr name="hbv_labels" format="string"/>
 
-        // Value
-        <attr name="hbv_showValue" format="boolean" />
+        // Min value
         <attr name="hbv_minValue" format="float"/>
-        <attr name="hbv_maxValue" format="float"/>
-        <attr name="hbv_value" format="float"/>
-        <attr name="hbv_valueTextColor" format="color"/>
-        <attr name="hbv_valueTextSize" format="dimension"/>
-        <attr name="hbv_valueSuffix" format="string"/>
-        <attr name="hbv_valueFont" format="reference"/>
-        // Decimal format
-        <attr name="hbv_valueDecimalFormat" format="string"/>
+        <attr name="hbv_showMinValue" format="boolean"/>
+        <attr name="hbv_minValueFont" format="reference"/>
+        <attr name="hbv_minValueTextColor" format="color"/>
+        <attr name="hbv_minValueTextSize" format="dimension"/>
+        <attr name="hbv_minValueSuffix" format="string"/>
+        <attr name="hbv_minValueDecimalFormat" format="string"/>
 
-        // Indicator
-        <attr name="hbv_indicatorWidth" format="dimension"/>
-        <attr name="hbv_indicatorColor" format="color"/>
+        // Max value
+        <attr name="hbv_maxValue" format="float"/>
+        <attr name="hbv_showMaxValue" format="boolean"/>
+        <attr name="hbv_maxValueFont" format="reference"/>
+        <attr name="hbv_maxValueTextColor" format="color"/>
+        <attr name="hbv_maxValueTextSize" format="dimension"/>
+        <attr name="hbv_maxValueSuffix" format="string"/>
+        <attr name="hbv_maxValueDecimalFormat" format="string"/>
 
         // Bar
         // Stroke
         <attr name="hbv_strokeWidth" format="dimension"/>
         <attr name="hbv_strokeColor" format="color"/>
         // Fill
-        <attr name="hbv_colorFrom" format="color"/>
-        <attr name="hbv_colorTo" format="color"/>
+        <attr name="hbv_startColor" format="color"/>
+        <attr name="hbv_endColor" format="color"/>
 
+        // Indicator
+        <attr name="hbv_indicatorWidth" format="dimension"/>
+        <attr name="hbv_indicatorColor" format="color"/>
+        <attr name="hbv_indicatorTopOverflow" format="dimension"/>
+        <attr name="hbv_indicatorBottomOverflow" format="dimension"/>
+
+        // Value
+        <attr name="hbv_value" format="float"/>
+        <attr name="hbv_showValue" format="boolean"/>
+        <attr name="hbv_valueFont" format="reference"/>
+        <attr name="hbv_valueTextColor" format="color"/>
+        <attr name="hbv_valueTextSize" format="dimension"/>
+        <attr name="hbv_valueSuffix" format="string"/>
+        <attr name="hbv_valueDecimalFormat" format="string"/>
         // Animation
         <attr name="hbv_animated" format="boolean"/>
         <attr name="hbv_animationDuration" format="integer"/>
+
+        // Label
+        <attr name="hbv_showLabel" format="boolean"/>
+        <attr name="hbv_labelTextColor" format="color"/>
+        <attr name="hbv_labelTextSize" format="dimension"/>
+        <attr name="hbv_labelFont" format="reference"/>
+        <attr name="hbv_labels" format="string"/>
+        <attr name="hbv_labelsRange" format="string"/>
+
     </declare-styleable>
 </resources>

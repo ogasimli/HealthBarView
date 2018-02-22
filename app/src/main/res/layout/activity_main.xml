@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Orkhan Gasimli - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited.
+  ~ This file is proprietary and confidential.
+  ~ Written by Orkhan Gasimli <orkhan.gasimli@gmail.com> in 2018.
+  -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -23,28 +30,43 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        HealthBarView:hbv_showLabel="true"
-        HealthBarView:hbv_labelTextColor="#009688"
-        HealthBarView:hbv_labelTextSize="16sp"
-        HealthBarView:hbv_labelFont="@font/lato_light_italic"
-        HealthBarView:hbv_labels="Poor,Below Average,Average,Above Average,Good,Excellent"
+        HealthBarView:hbv_minValue="0"
+        HealthBarView:hbv_showMinValue="false"
+        HealthBarView:hbv_minValueTextColor="#009688"
+        HealthBarView:hbv_minValueTextSize="16sp"
+        HealthBarView:hbv_minValueFont="@font/lato_light_italic"
+        HealthBarView:hbv_minValueSuffix="\u00B0"
+        HealthBarView:hbv_minValueDecimalFormat="0"
+        HealthBarView:hbv_maxValue="100"
+        HealthBarView:hbv_showMaxValue="false"
+        HealthBarView:hbv_maxValueTextColor="#009688"
+        HealthBarView:hbv_maxValueTextSize="16sp"
+        HealthBarView:hbv_maxValueFont="@font/lato_light_italic"
+        HealthBarView:hbv_maxValueSuffix="\u00B0"
+        HealthBarView:hbv_maxValueDecimalFormat="0"
+        HealthBarView:hbv_strokeWidth="1dp"
+        HealthBarView:hbv_strokeColor="#009688"
+        HealthBarView:hbv_startColor="#ffc200"
+        HealthBarView:hbv_endColor="#7bfbaf"
+        HealthBarView:hbv_indicatorWidth="0.5dp"
+        HealthBarView:hbv_indicatorColor="#009688"
+        HealthBarView:hbv_indicatorTopOverflow="5dp"
+        HealthBarView:hbv_indicatorBottomOverflow="5dp"
         HealthBarView:hbv_showValue="true"
         HealthBarView:hbv_valueTextColor="#009688"
         HealthBarView:hbv_valueTextSize="16sp"
         HealthBarView:hbv_valueFont="@font/lato_light_italic"
-        HealthBarView:hbv_minValue="0"
-        HealthBarView:hbv_maxValue="100"
-        HealthBarView:hbv_value="90"
+        HealthBarView:hbv_value="81"
         HealthBarView:hbv_valueSuffix="\u00B0"
         HealthBarView:hbv_valueDecimalFormat="0"
-        HealthBarView:hbv_indicatorWidth="0.5dp"
-        HealthBarView:hbv_indicatorColor="#009688"
-        HealthBarView:hbv_strokeWidth="1dp"
-        HealthBarView:hbv_strokeColor="#009688"
-        HealthBarView:hbv_colorFrom="#ffc200"
-        HealthBarView:hbv_colorTo="#7bfbaf"
         HealthBarView:hbv_animated="true"
-        HealthBarView:hbv_animationDuration="4000"/>
+        HealthBarView:hbv_animationDuration="4000"
+        HealthBarView:hbv_showLabel="true"
+        HealthBarView:hbv_labelTextColor="#009688"
+        HealthBarView:hbv_labelTextSize="16sp"
+        HealthBarView:hbv_labelFont="@font/lato_light_italic"
+        HealthBarView:hbv_labels="Cold|Normal|Warm|Hot|Very Hot"
+        HealthBarView:hbv_labelsRange="25.5|50|75|85|100"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
